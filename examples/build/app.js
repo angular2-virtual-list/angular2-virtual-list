@@ -12,16 +12,20 @@ var browser_1 = require('angular2/platform/browser');
 var angular2_virtual_list_1 = require('angular2-virtual-list/angular2-virtual-list');
 var MyApp = (function () {
     function MyApp() {
-        this.dataProvider = [
-            'angular2',
-            'rocks',
-            'baby!'
-        ];
+        this.dataProvider = [];
+        for (var i = 0; i < 1000000; i++) {
+            this.dataProvider.push({
+                label: 'item #' + i, value: i
+            });
+        }
     }
+    MyApp.prototype.onSelectItem = function ($event) {
+        this.item = $event;
+    };
     MyApp = __decorate([
         core_1.Component({
             selector: 'my-app',
-            template: "<virtual-list [items]=\"dataProvider\"></virtual-list>",
+            template: "\n        <virtual-list [items]=\"dataProvider\" (onSelectItem)=\"onSelectItem($event)\"></virtual-list>\n        <span>item #{{item?.value}} selected!</span>\n        ",
             directives: [angular2_virtual_list_1.VirtualList]
         }), 
         __metadata('design:paramtypes', [])
