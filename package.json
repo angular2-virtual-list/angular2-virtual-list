@@ -1,15 +1,22 @@
 {
   "name": "angular2-virtual-list",
-  "version": "0.0.1",
   "description": "An Angular 2 virtual list component",
-  "main": "index.js",
+  "main": "angular2-virtual-list.js",
   "scripts": {
+    "start": "npm run test",
+    "pretest": "npm run build",
+    "test": "karma start karma.conf.js",
+    "posttest": "node_modules/.bin/remap-istanbul -i coverage/coverage-final.json -o coverage -t html",
     "prebuild": "rm -rf dist && mkdir dist",
-    "build": "rm -rf dist && tsc -p src"
+    "build": "tsc -p src",
+    "commit": "git-cz",
+    "coverage": "http-server -c-1 -o -p 9875 ./coverage",
+    "report-coverage": "cat ./coverage/lcov.info | codecov",
+    "semantic-release": "semantic-release pre && npm publish && semantic-release post"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/angular2-virtual-list/angular2-virtual-list.git"
+    "url": "https://github.com/angular2-virtual-list/angular2-virtual-list.git"
   },
   "keywords": [
     "angular2",
@@ -22,16 +29,38 @@
   "bugs": {
     "url": "https://github.com/angular2-virtual-list/angular2-virtual-list/issues"
   },
+  "czConfig": {
+    "path": "node_modules/cz-conventional-changelog"
+  },
+  "config": {
+    "ghooks": {
+      "pre-commit": "npm run test"
+    }
+  },
   "homepage": "https://github.com/angular2-virtual-list/angular2-virtual-list#readme",
   "dependencies": {
-    "angular2": "2.0.0-beta.2",
-    "es6-shim": "0.34.2",
-    "reflect-metadata": "0.1.3",
-    "rxjs": "5.0.0-beta.1",
+    "angular2": "2.0.0-beta.1",
+    "es6-shim": "0.33.3",
+    "reflect-metadata": "0.1.2",
+    "rxjs": "5.0.0-beta.0",
     "systemjs": "0.19.17",
-    "zone.js": "0.5.11"
+    "zone.js": "0.5.10"
   },
   "devDependencies": {
+    "codecov.io": "0.1.6",
+    "commitizen": "2.5.0",
+    "cz-conventional-changelog": "1.1.5",
+    "es6-module-loader": "0.17.10",
+    "ghooks": "1.0.3",
+    "http-server": "0.8.5",
+    "jasmine-core": "2.4.1",
+    "karma": "0.13.19",
+    "karma-chrome-launcher": "0.2.2",
+    "karma-coverage": "0.5.3",
+    "karma-jasmine": "0.3.6",
+    "remap-istanbul": "0.5.1",
+    "semantic-release": "^4.3.5",
+    "traceur": "0.0.96",
     "tsd": "0.6.5",
     "typescript": "1.7.5"
   }
