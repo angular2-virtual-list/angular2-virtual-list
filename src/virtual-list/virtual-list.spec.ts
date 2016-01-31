@@ -9,7 +9,8 @@ describe('Virtual List', () => {
     beforeEach(() => {
         ref = {
             nativeElement: {
-                scrollTop: 1500
+                scrollTop: 1500,
+                clientHeight: 200
             }
         };
 
@@ -52,7 +53,9 @@ describe('Virtual List', () => {
         expect(list.items.slice).toHaveBeenCalledWith(43, 63);
         expect(list.visibleProvider.length).toBe(20);
         expect(list.visibleProvider[0].styles).toEqual({
-            'top':  '1290px'
+            'top':  '1290px',
+            'height': '30px',
+            'line-height': '30px'
         });
     });
 });
