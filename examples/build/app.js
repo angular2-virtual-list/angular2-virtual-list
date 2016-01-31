@@ -13,6 +13,7 @@ var angular2_virtual_list_1 = require('angular2-virtual-list/angular2-virtual-li
 var MyApp = (function () {
     function MyApp() {
         this.dataProvider = [];
+        this.rowHeight = 50;
         for (var i = 0; i < 1000000; i++) {
             this.dataProvider.push({
                 label: 'item #' + i, value: i
@@ -25,7 +26,7 @@ var MyApp = (function () {
     MyApp = __decorate([
         core_1.Component({
             selector: 'my-app',
-            template: "\n        <virtual-list [items]=\"dataProvider\" (onSelectItem)=\"onSelectItem($event)\"></virtual-list>\n        <span>item #{{item?.value}} selected!</span>\n        ",
+            template: "\n        <virtual-list [items]=\"dataProvider\" [rowHeight]=\"rowHeight\" (onSelectItem)=\"onSelectItem($event)\" style=\"height: 500px;\"></virtual-list>\n        <span>item #{{item?.value}} selected!</span>\n        ",
             directives: [angular2_virtual_list_1.VirtualList]
         }), 
         __metadata('design:paramtypes', [])

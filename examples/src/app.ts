@@ -5,7 +5,7 @@ import {VirtualList} from 'angular2-virtual-list/angular2-virtual-list';
 @Component({
     selector: 'my-app',
     template: `
-        <virtual-list [items]="dataProvider" (onSelectItem)="onSelectItem($event)"></virtual-list>
+        <virtual-list [items]="dataProvider" [rowHeight]="rowHeight" (onSelectItem)="onSelectItem($event)" style="height: 500px;"></virtual-list>
         <span>item #{{item?.value}} selected!</span>
         `,
     directives: [VirtualList]
@@ -13,6 +13,7 @@ import {VirtualList} from 'angular2-virtual-list/angular2-virtual-list';
 class MyApp {
     dataProvider:Array<any> = [];
     item:Object;
+    rowHeight:number = 50;
 
     constructor() {
         for (var i=0; i<1000000; i++) {

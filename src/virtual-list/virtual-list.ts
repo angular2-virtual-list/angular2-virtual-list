@@ -11,7 +11,6 @@ import {bootstrap} from 'angular2/platform/browser';
     styles: [`
         :host {
           width: 200px;
-          max-height: 200px;
           overflow-y: auto;
           display: block;
         }
@@ -26,7 +25,6 @@ import {bootstrap} from 'angular2/platform/browser';
             width: 100%;
             cursor: pointer;
             position: absolute;
-            height: 30px;
             line-height: 30px;
         }
 
@@ -48,8 +46,7 @@ import {bootstrap} from 'angular2/platform/browser';
 export class VirtualList implements OnInit {
     ref:ElementRef;
 
-    rowHeight:number = 30;
-    height:number = 200;
+    height:number;
     visibleProvider:Array<any> = [];
     cellsPerPage:number = 0;
     numberOfCells:number = 0;
@@ -61,6 +58,7 @@ export class VirtualList implements OnInit {
     };
 
     @Input() items:Array<any>;
+    @Input() rowHeight:number = 30;
 
     @Output() onSelectItem:EventEmitter<any> = new EventEmitter();
 
@@ -69,6 +67,7 @@ export class VirtualList implements OnInit {
     }
 
     ngOnInit() {
+        this.height = this.ref.nativeElement.clientHeight;
         this.cellsPerPage = Math.round(this.height / this.rowHeight);
         this.numberOfCells = 3 * this.cellsPerPage;
         this.canvasHeight = {
@@ -86,7 +85,9 @@ export class VirtualList implements OnInit {
 
         for (var i = 0; i < this.visibleProvider.length; i++) {
             this.visibleProvider[i].styles = {
-                'top': ((firstCell + i) * this.rowHeight) + "px"
+                'top': ((firstCell + i) * this.rowHeight) + 'px',
+                'height': this.rowHeight + 'px',
+                'line-height': this.rowHeight + 'px'
             }
         }
     };
