@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "build": "rm -rf build && mkdir build && tsc -p src || true",
-    "start": "http-server -c-1 ."
+    "prestart": "npm run build",
+    "start": "http-server -c-1 -o -p 9876 ."
   },
   "author": "",
   "license": "ISC",
@@ -14,6 +15,7 @@
   },
   "dependencies": {
     "angular2": "^2.0.0-beta.1",
+    "angular2-virtual-list": "0.1.0",
     "es6-shim": "^0.34.0",
     "http-server": "^0.8.5",
     "reflect-metadata": "^0.1.2",
